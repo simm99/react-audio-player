@@ -1,20 +1,130 @@
 /* App layout */
 .app {
-  display: flex;
-  height: 100vh;
+  position: relative;
+  background-image: url('./assets/black_stones.jpg');
   background-size: cover;
   background-position: center;
-  font-family: Arial, sans-serif;
-  color: white;
+  background-attachment: fixed;
+  min-height: 100vh;
+  z-index: 1; /* Se till att bakgrunden syns */
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Genomskinlig svart överläggning */
+  z-index: 2; /* Högre än bakgrunden men under innehåll */
+}
+
+.main-content {
+  position: relative;
+  z-index: 3; /* Se till att innehållet syns över överläggningen */
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 250px;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  box-shadow: 3px 0 60px rgba(0, 0, 0, 0.9); /* Lägg till skugga */
+  transform: translateX(-250px); /* Gömmer panelen */
+  transition: transform 0.3s ease-in-out;
+  z-index: 4; /* Gör den överst */
 }
 
+button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.volume-slider {
+  writing-mode: bt-lr; /* Rotates the slider */
+  height: 100px; /* Adjust height as needed */
+  margin-left: 10px; /* Optional: add some space */
+}
+
+.volume-slider::-webkit-slider-thumb {
+  /* Optional: style the thumb */
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  /* Optional: style the thumb for Firefox */
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+
+button:hover {
+  color: lightgray; /* Lätt hover-effekt */
+}
+
+
+.app:hover .sidebar {
+  transform: translateX(0); /* Visa panelen när musen är över */
+}
+
+.sidebar-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px; /* Ändra till bredare */
+  height: 100vh;
+  z-index: 1;
+  background-color: transparent; /* Osynlig, men användbar för musen */
+}
 
 .sidebar h2 {
   color: white;
@@ -39,6 +149,14 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;
+}
+
+.track-image {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%; /* Gör bilden cirkulär */
+  object-fit: cover;
+  margin: 10px;
 }
 
 .audio-player {
